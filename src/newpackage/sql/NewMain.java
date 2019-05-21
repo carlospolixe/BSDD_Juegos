@@ -5,8 +5,6 @@
  */
 package newpackage.sql;
 
-import java.util.HashMap;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,17 +13,21 @@ import javax.persistence.Persistence;
  *
  * @author PC02
  */
-public class Metodos {
-    
-  public void insertar(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ZonalerosPU");
+public class NewMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("zonalerosPU");
         EntityManager em = emf.createEntityManager();
-        
-     // iniciar y finalizr transaciones
         em.getTransaction().begin();
-            //aqui se realizan las operaciones de prueba
-            Desarrolladora EA = new Desarrolladora(0, 1, "EA");
-            EA.setCodigoDesarrolladora(1);
-        em.getTransaction().commit();
-  }
+            Desarrolladora Ubisoft = new Desarrolladora(0, 2, "Ubisoft");
+            Ubisoft.setCodigoDesarrolladora(2);
+            em.persist(Ubisoft);
+    }
+        
 }
+    
+

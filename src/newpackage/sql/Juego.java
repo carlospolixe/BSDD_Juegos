@@ -38,12 +38,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Juego.findByCodigo", query = "SELECT j FROM Juego j WHERE j.codigo = :codigo")
     , @NamedQuery(name = "Juego.findByDescripcion", query = "SELECT j FROM Juego j WHERE j.descripcion = :descripcion")
     , @NamedQuery(name = "Juego.findByPaisDesarrolador", query = "SELECT j FROM Juego j WHERE j.paisDesarrolador = :paisDesarrolador")
-    , @NamedQuery(name = "Juego.findByFechaCreacion", query = "SELECT j FROM Juego j WHERE j.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "Juego.findByFechaSalida", query = "SELECT j FROM Juego j WHERE j.fechaSalida = :fechaSalida")
     , @NamedQuery(name = "Juego.findByNumDesarrolladores", query = "SELECT j FROM Juego j WHERE j.numDesarrolladores = :numDesarrolladores")
     , @NamedQuery(name = "Juego.findByPresupuesto", query = "SELECT j FROM Juego j WHERE j.presupuesto = :presupuesto")
-    , @NamedQuery(name = "Juego.findByStock", query = "SELECT j FROM Juego j WHERE j.stock = :stock")
-    , @NamedQuery(name = "Juego.findByFoto", query = "SELECT j FROM Juego j WHERE j.foto = :foto")})
+    , @NamedQuery(name = "Juego.findByStock", query = "SELECT j FROM Juego j WHERE j.stock = :stock")})
 public class Juego implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,9 +64,6 @@ public class Juego implements Serializable {
     @Basic(optional = false)
     @Column(name = "PAIS_DESARROLADOR")
     private int paisDesarrolador;
-    @Column(name = "FECHA_CREACION")
-    @Temporal(TemporalType.DATE)
-    private Date fechaCreacion;
     @Column(name = "FECHA_SALIDA")
     @Temporal(TemporalType.DATE)
     private Date fechaSalida;
@@ -79,9 +74,6 @@ public class Juego implements Serializable {
     private BigDecimal presupuesto;
     @Column(name = "STOCK")
     private Boolean stock;
-    @Basic(optional = false)
-    @Column(name = "FOTO")
-    private String foto;
     @JoinColumn(name = "CODIGO_DESARROLLADORA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Desarrolladora codigoDesarrolladora;
@@ -93,13 +85,12 @@ public class Juego implements Serializable {
         this.id = id;
     }
 
-    public Juego(Integer id, String nombre, String genero, String codigo, int paisDesarrolador, String foto) {
+    public Juego(Integer id, String nombre, String genero, String codigo, int paisDesarrolador) {
         this.id = id;
         this.nombre = nombre;
         this.genero = genero;
         this.codigo = codigo;
         this.paisDesarrolador = paisDesarrolador;
-        this.foto = foto;
     }
 
     public Integer getId() {
@@ -150,14 +141,6 @@ public class Juego implements Serializable {
         this.paisDesarrolador = paisDesarrolador;
     }
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
-
     public Date getFechaSalida() {
         return fechaSalida;
     }
@@ -188,14 +171,6 @@ public class Juego implements Serializable {
 
     public void setStock(Boolean stock) {
         this.stock = stock;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
     }
 
     public Desarrolladora getCodigoDesarrolladora() {

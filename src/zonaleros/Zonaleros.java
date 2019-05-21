@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import newpackage.sql.Desarrolladora;
 
 /**
  *
@@ -26,9 +27,14 @@ public class Zonaleros {
         // TODO code application logic here
         Map<String, String> emfProperties = new HashMap<String, String>();
         emfProperties.put("javax.persistence.schema-generation.database.action", "create");
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ZonalerosPU", emfProperties);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("zonalerosPU", emfProperties);
         EntityManager em = emf.createEntityManager();
-
+        
+        // iniciar y finalizr transaciones
+        em.getTransaction().begin();
+            //aqui se realizan las operaciones de prueba
+            Desarrolladora EA = new Desarrolladora();
+        em.getTransaction().commit();
         // REALIZAR AQUÍ LAS OPERACIONES SOBRE LA BASE DE DATOS
         
         // Cerrar la conexión con la base de datos
