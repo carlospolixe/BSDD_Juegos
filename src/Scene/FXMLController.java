@@ -120,6 +120,7 @@ public class FXMLController implements Initializable {
             tabla.requestFocus();
         }
         }catch (Exception e){
+            // muestra el mensaje de error cuando no dejar guardar la trnasicion actual 
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "No hay nada que guardar");
             alert.showAndWait();
         }
@@ -174,7 +175,6 @@ public class FXMLController implements Initializable {
             StackPane rootMain = (StackPane)rootJuegosView.getScene().getRoot();
             rootMain.getChildren().add(rootDetalleView);
      
-            ////////////////////////////////////////////////////////////////////////
             
             
         } catch (IOException ex) {
@@ -211,6 +211,7 @@ public class FXMLController implements Initializable {
     private void onActionButtonSuprimir(ActionEvent event) {
         try {
             if(juegoSeleccionado != null) {
+            // muestra el mensaje al suprimir de si esta seguro de esta transacion
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Suprimir");
             alert.setHeaderText("¿Desea suprimir el siguiente registro?");
@@ -231,6 +232,8 @@ public class FXMLController implements Initializable {
                 tabla.requestFocus();            
             }
         } else {
+            // muestra el mensaje de error del suprimir si la transaccion no se 
+            //llega a realizar correctamente
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Atención");
             alert.setHeaderText("Debe seleccionar un registro");

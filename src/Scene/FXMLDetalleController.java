@@ -92,6 +92,7 @@ public class FXMLDetalleController implements Initializable {
     }    
 
     public void setTableViewPrevio(TableView tableViewPrevio) {
+    // establece el table previo
     this.tableViewPrevio = tableViewPrevio;
     }
     
@@ -107,7 +108,7 @@ public class FXMLDetalleController implements Initializable {
     }
     
     public void mostrarDatos() {
-    
+    // muestra los datos de la tabla juego en los campos
     textFieldNombre.setText(juego.getNombre());
     textFieldGenero.setText(juego.getGenero());
     textFieldCodigo.setText(juego.getCodigo());
@@ -166,6 +167,7 @@ public class FXMLDetalleController implements Initializable {
 }
 
     public void setRootJuegosView(Pane rootJuegoView) {
+    //establece el root
     this.rootJuegosView = rootJuegoView;
     }
 
@@ -173,8 +175,10 @@ public class FXMLDetalleController implements Initializable {
 
     @FXML
     private void onActionButtonGuardar(ActionEvent event) {
+        // guarda la transicion  que estemos haciendo y sale a la pagina anterior a la de nuevo
         try { 
             int numFilaSeleccionada;
+            //convierte la fecha al formato 
              String fecha = (datePickerFecha.getValue().getDayOfMonth() + "/" + datePickerFecha.getValue().getMonthValue() + "/" + datePickerFecha.getValue().getYear());
             try{
                 Date date = new SimpleDateFormat ("dd/MM/yy").parse(fecha);
@@ -236,13 +240,16 @@ public class FXMLDetalleController implements Initializable {
 
     @FXML
     private void onActionButtonCancelar(ActionEvent event) {
+    // cancela la transicion y sale a la pagina anterior a la de nuevo
+    try {      
+    
         entityManager.getTransaction().rollback();
 
         int numFilaSeleccionada = tableViewPrevio.getSelectionModel().getSelectedIndex();
         TablePosition pos = new TablePosition(tableViewPrevio, numFilaSeleccionada, null);
         tableViewPrevio.getFocusModel().focus(pos);
         tableViewPrevio.requestFocus();
-        
+    }catch (Exception e){} 
         StackPane rootMain = (StackPane)rootJuegosView.getScene().getRoot();
         rootMain.getChildren().remove(rootDetalleView);  
         rootJuegosView.setVisible(true);
